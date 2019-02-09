@@ -39,7 +39,7 @@ class NHTSA implements Vehicle {
         $response = $this->client->get("https://one.nhtsa.gov/webapi/api/SafetyRatings/VehicleId/$vehicleId?format=json");
         if($response->getReasonPhrase() === 'OK'){
             $data = json_decode($response->getBody());
-            $rating = $data->Results[0]->OverallRating;
+            $data->Count > 0 ? $rating = $data->Results[0]->OverallRating: null;
         }
         return $rating;
     }
